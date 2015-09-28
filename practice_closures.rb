@@ -1,13 +1,13 @@
 require 'pry'
 class Array
-  def iterate!(&code)
+  def iterate!(code)
     # binding.pry
     self.each_with_index do |n, i|
       self[i] = code.call(n)
     end
   end
 
-  def iterate(&code)
+  def iterate(code)
     self.each_with_index do |n, i|
       code.call(n)
     end
@@ -15,16 +15,9 @@ class Array
   end
 end
 
+square = proc { |n| n**2 }
 my_array = [1, 2 ,3, 4]
-
-my_array.iterate do |n|
-  p "#{n} raised to 2: #{n**2}"
-end
-
+my_array.iterate(square)
 p my_array
-
-my_array.iterate! do |n|
-  n**2
-end
-
+my_array.iterate!(square)
 p my_array
