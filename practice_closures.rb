@@ -1,15 +1,15 @@
 require 'pry'
 class Array
-  def iterate!
+  def iterate!(&code)
     # binding.pry
     self.each_with_index do |n, i|
-      self[i] = yield(n)
+      self[i] = code.call(n)
     end
   end
 
-  def iterate
+  def iterate(&code)
     self.each_with_index do |n, i|
-      yield(n)
+      code.call(n)
     end
     self
   end
